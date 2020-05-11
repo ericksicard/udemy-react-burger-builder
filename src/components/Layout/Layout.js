@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Aux from '../../hoc/Aux';
-import style from './Layout.module.css';
+import classes from './Layout.module.css';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
@@ -13,28 +13,27 @@ class Layout extends Component {
         this.setState({ showSideDrawer: false })
     }
 
-    sideDrawerHandler = () => {
+    sideDrawerToggleHandler = () => {
         // Clean way of setting the state when it depends on the old state
         this.setState( ( prevState ) => {
-            return { showSideDrawer: !prevState.showSideDrawer }
-        }) 
+            return { showSideDrawer: !prevState.showSideDrawer };
+        } ); 
     }
 
     render() {
         return (
             <Aux>
                 <Toolbar 
-                    drawerToggleClicked={this.sideDrawerHandler}
+                    drawerToggleClicked={this.sideDrawerToggleHandler}
                 />
                 <SideDrawer
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler}
                 />
-                <main className={style.Content}>
+                <main className={classes.Content}>
                     {this.props.children}
                 </main>
             </Aux>
-
         )
     }
 }
